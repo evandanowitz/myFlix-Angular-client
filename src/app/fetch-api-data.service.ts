@@ -18,4 +18,12 @@ export class FetchApiDataService {
   // 'HttpClient' is a service used to make HTTP requests.
   constructor(private http: HttpClient) { }
 
+  // Logic for API call for 'User registration' endpoint
+  public userRegistration(userDetails: any): Observable<any> { // userRegistration takes argument of type 'any' that's the 'userDetails' to post to the API endpoint.
+    console.log(userDetails);
+    return this.http.post(apiUrl + 'users', userDetails).pipe( // Using this.http, it posts it to the API endpoint and returns the API's response.
+      catchError(this.handleError)
+    );
+  }
+
 }
