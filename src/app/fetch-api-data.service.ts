@@ -6,9 +6,9 @@ import { Observable, throwError } from 'rxjs';
 // Declaring the API URL that will provide data for the client app
 const apiUrl = 'https://myflix-db-movie-app-af5513e7733f.herokuapp.com/'; // Hosted API URL (Heroku)
 
-// A decorator that marks a class as available to be provided and injected as a dependency
+// Decorator that marks a class as available to be provided and injected as a dependency
 @Injectable({
-  providedIn: 'root' // Configures the service to be provided in the root injector, making it available throughout the app.
+  providedIn: 'root' // Configures the service for root injector (makes it available throughout app)
 })
 export class FetchApiDataService {
   // Injecting HttpClient module to constructor params provides it to entire class, available via `this.http`
@@ -18,24 +18,18 @@ export class FetchApiDataService {
   // 'HttpClient' is a service used to make HTTP requests.
   constructor(private http: HttpClient) { }
 
-  // Logic for API call for 'User registration' endpoint
-  public userRegistration(userDetails: any): Observable<any> { // userRegistration takes argument of type 'any' that's the 'userDetails' to post to the API endpoint.
-    console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe( // Using this.http, it posts it to the API endpoint and returns the API's response.
+  public userRegistration(userData: any): Observable<any> { // userRegistration takes argument of type 'any' that's the 'userDetails' to post to the API endpoint.
+    console.log('Sending user registration data:', userData);
+    return this.http.post(apiUrl + 'users', userData).pipe( // Using this.http, it posts it to the API endpoint and returns the API's response.
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'User login' endpoint.
-  public userLogin(userDetails: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+  public userLogin(userData: any): Observable<any> {
+    console.log(userData);
+    return this.http.post(apiUrl + 'login', userData).pipe(
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Get all movies' endpoint
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {
@@ -45,8 +39,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Get one movie' endpoint
   public getOneMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/' + title, {
@@ -56,8 +48,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Get director' endpoint
   public getDirector(name: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'directors/' + name, {
@@ -67,8 +57,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Get genre' endpoint
   public getGenre(name: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'genres/' + name, {
@@ -78,8 +66,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Get user' endpoint
   public getUser(Username: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'users/' + Username, {
@@ -89,8 +75,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Get favorite movies for a user' endpoint
   public getFavoriteMovies(Username: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'users/' + Username + 'movies/', {
@@ -100,8 +84,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Add a movie to favorite movies' endpoint
   public addToFavMovies(Username: any, MovieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.post(apiUrl + 'users/' + Username + '/movies/' + MovieID, null, {
@@ -111,8 +93,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Edit user' endpoint
   public editUser(Username: any, userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.put(apiUrl + 'users/' + Username, userDetails, {
@@ -122,8 +102,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Delete user' endpoint
   public deleteUser(Username: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + 'users/' + Username, {
@@ -133,8 +111,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // Logic for API call for 'Delete a movie from favorite movies' endpoint
   public deleteFromFavMovies(Username: any, MovieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + 'users/' + Username + '/movies/' + MovieID, {
@@ -153,16 +129,14 @@ export class FetchApiDataService {
 
   // Handles HTTP errors. @param { HttpErrorResponse } error - HTTP error response. @returns { any } - Error details.
   private handleError(error: HttpErrorResponse): any { // parameter 'error' is of type 'HttpErrorResponse', which represents the error response from HTTP req.
+    console.error('Registration error:', error);
     if (error.error instanceof ErrorEvent) { // checks if the error is a client-side or network error. 'ErrorEvent' is used for client-side errors.
-      console.error('Some error occurred:', error.error.message); // logs error message to console. Logs the error message from the 'ErrorEvent'.
+      console.error('Client-side error:', error.error.message); // logs error message to console. Logs the error message from the 'ErrorEvent'.)
     } else { // if the error is a server-side error...
-      console.error( // executes the following error in the console:
-        `Error Status code ${error.status}, ` + // logs the HTTP status code of the error.
-        `Error body is: ${error.error}` // logs the body of the error message.
+      console.error(`Backend error: ${error.status}, body was:`, error.error); // logs error
+      return throwError(() => // a function from RxJS that returns an observable that emits an error.
+        new Error(error.error.message || 'Something went wrong; please try again later.') // Creates a new error with a specific message to be thrown.
       );
     }
-    return throwError(() => // a function from RxJS that returns an observable that emits an error.
-      new Error('Something bad happened; please try again later.') // Creates a new error with a specific message to be thrown.
-    );
   }
 }
