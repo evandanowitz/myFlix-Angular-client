@@ -1,7 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog'; // You'll use this import to close the dialog on success
-import { FetchApiDataService } from '../fetch-api-data.service'; // This import brings in the API calls created in 6.2
-import { MatSnackBar } from '@angular/material/snack-bar'; // This import is used to display notifications back to the user
+
+// You'll use this import to close the dialog on success
+import { MatDialogRef } from '@angular/material/dialog';
+
+// This import brings in the API calls created in 6.2
+import { FetchApiDataService } from '../fetch-api-data.service';
+
+// This import is used to display notifications back to the user
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Using the @Component decorator to tell Angular that the class below is a component
 // The decorator contains instructions for wiring up the the class with its stylesheet and template file
@@ -30,16 +36,17 @@ export class UserRegistrationFormComponent implements OnInit {
 
   // This is the function responsible for sending the form inputs to the backend
   registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      // Logic for a successful user registration goes here (to be implemented)
-      this.dialogRef.close(); // This will close the modal on success
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
-    }, (result) => {
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
-    });
+    console.log('User data before sending:', this.userData);
+    this.fetchApiData.userRegistration(this.userData).subscribe(
+      (result) => {
+        console.log('Registration Successful:', result);
+        this.dialogRef.close();
+        this.snackBar.open('Registration Successful', 'OK', { duration: 2000 });
+      },
+      (error) => {
+        console.error('Registration Failure:', error);
+        this.snackBar.open(error, 'OK', { duration: 2000 });
+      }
+    );
   }
 }
