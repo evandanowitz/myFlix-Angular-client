@@ -3,10 +3,9 @@
 
   <div class="display-user-info-section">
     <h2>User Info</h2>
-    <p>Username: </p>
-    <p>Password: </p>
-    <p>Email: </p>
-    <p>Birthday: </p>
+    <p>Username: {{ user.Username }}</p>
+    <p>Email: {{ user.Email }}</p>
+    <p>Birthday: {{ user.Birthday | date }}</p>
   </div>
 
   <div class="update-user-info-section">
