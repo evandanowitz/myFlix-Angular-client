@@ -1,24 +1,81 @@
 <div class="user-profile-container">
   <h1 class="user-profile-title">User Profile</h1>
 
+  <!-- Display user info section -->
   <div class="display-user-info-section">
     <h2>User Info</h2>
-    <p>Username: {{ user.Username }}</p>
-    <p>Email: {{ user.Email }}</p>
-    <p>Birthday: {{ user.Birthday | date }}</p>
-  </div>
-
-  <div class="update-user-info-section">
-    <h2>Update User Info</h2>
-    <div class="update-user-info">
-      <p>Username: </p>
-      <p>Password: </p>
-      <p>Email: </p>
-      <p>Birthday: </p>
+    <!-- Username -->
+    <div class="user-info-item">
+      <span class="user-info-label">Username:</span>
+      <span>{{ user.Username }}</span>
+    </div>
+    <!-- Email -->
+    <div class="user-info-item">
+      <span class="user-info-label">Email:</span>
+      <span>{{ user.Email }}</span>
+    </div>
+    <!-- Birthday -->
+    <div class="user-info-item">
+      <span class="user-info-label">Birthday:</span>
+      <span>{{ user.Birthday | date }}</span>
     </div>
   </div>
 
-  <div class="fav-movies-list">
-    <h2>Favorite Movies List</h2>
+  <!-- Update User Info Section -->
+  <div class="update-user-info-section">
+    <h2>Update User Info</h2>
+    <form (ngSubmit)="updateUserInfo()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="updatedUser.Username" type="text" id="username" name="username"
+          placeholder="Type new username here...">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="updatedUser.Password" type="password" id="password" name="password"
+          placeholder="Type new password here...">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="updatedUser.Email" type="email" id="email" name="email"
+          placeholder="Type new email here...">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Birthday</mat-label>
+        <input matInput [(ngModel)]="updatedUser.Birthday" type="date" id="birthday" name="birthday"
+          placeholder="Type new username here...">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Update Info</button>
+    </form>
   </div>
+
+  <!-- Favorite Movies Section -->
+  <div class="favorite-movies-section">
+    <h2>Favorite Movies</h2>
+    <div *ngIf="favoriteMovies.length > 0; else noFavorites">
+      <div *ngFor="let movie of favoriteMovies">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ movie.Title }}</mat-card-title>
+            <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+          </mat-card-header>
+          <img [src]="movie.ImagePath" alt="{{ movie.Title }}" />
+          <mat-card-actions>
+            <button mat-button color="primary" (click)="openGenreDialog(movie.Genre.Name)">Genre</button>
+            <button mat-button color="primary" (click)="openDirectorDialog(movie.Director.Name)">Director</button>
+            <button mat-button color="primary" (click)="openSynopsisDialog(movie)">Synopsis</button>
+            <mat-icon (click)="toggleFavorite(movie)" class="favorite-icon">
+              {{ isFavorite(movie._id) ? 'favorite' : 'favorite_border' }}
+            </mat-icon>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- If no favorite movies are available -->
+    <ng-template #noFavorites>
+      <p>No favorite movies added yet.</p>
+    </ng-template>
+  </div>
+
 </div>

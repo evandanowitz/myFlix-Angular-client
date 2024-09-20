@@ -1,4 +1,258 @@
+/* Outer container */
 .user-profile-container {
-  padding: 20px;
-  margin: 20px;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #3498db 30%, #2c3e50 100%);
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+/* Title styling */
+.user-profile-title {
+  font-size: 2.4em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Section for displaying user info */
+.display-user-info-section {
+  margin-bottom: 35px;
+  background-color: #f0f4f7;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  /* Info card for each item */
+  .user-info-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #2c3e50;
+    transition: box-shadow 0.2s ease;
+
+    /* Label styling */
+    .user-info-label {
+      font-weight: 600;
+      color: #34495e;
+    }
+
+    /* Hover effect for individual info cards */
+    &:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  p {
+    color: #2c3e50;
+    margin: 12px 0;
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+}
+
+/* Section for updating user info */
+.update-user-info-section {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Uniform <h2> styling */
+  h2 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #34495e;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 1em;
+      color: #2c3e50;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1.1em;
+      background-color: #fafafa;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #2980b9;
+      outline: none;
+      box-shadow: 0 0 10px rgba(41, 128, 185, 0.5);
+      background-color: #ffffff;
+    }
+
+    input[type="date"] {
+      padding: 10px;
+    }
+
+    button {
+      grid-column: 1 / -1;
+      padding: 12px;
+      background-color: #e67e22;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #d35400;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(211, 84, 0, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+}
+
+/* Favorite Movies Section */
+/* Container styling for better alignment and spacing */
+.favorite-movies-section {
+  margin-top: 40px;
+  background-color: #f0f4f7;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.2em;
+
+  /* Uniform <h2> styling */
+  h2 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #34495e;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  /* Container for movie cards */
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    /* Add gap between movie cards */
+  }
+
+  /* Card styling */
+  mat-card {
+    flex: 1 1 calc(33% - 40px);
+    /* Allow 3 cards per row with spacing */
+    margin: 15px;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+    background-color: #e3f2fd;
+    padding: 10px;
+    border: 2px solid #3498db;
+  }
+
+  mat-card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Image styling */
+  .movie-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  /* Card title and subtitle */
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  mat-card-subtitle {
+    font-size: 1rem;
+    text-align: center;
+    color: #7f8c8d;
+  }
+
+  /* Button styling */
+  mat-card-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+
+  button[mat-button] {
+    color: #2980b9;
+    font-weight: bold;
+  }
+
+  mat-icon {
+    cursor: pointer;
+    color: #e74c3c;
+    transition: color 0.3s ease;
+  }
+
+  /* Icon hover effect */
+  mat-icon:hover {
+    color: #c0392b;
+  }
+
+  /* Responsive design for smaller screens */
+  @media (max-width: 1024px) {
+    mat-card {
+      flex: 1 1 calc(50% - 40px);
+      /* 2 cards per row on medium screens */
+    }
+  }
+
+  @media (max-width: 768px) {
+    mat-card {
+      flex: 1 1 100%;
+      /* 1 card per row on small screens */
+    }
+
+    .movie-img {
+      height: 300px;
+    }
+  }
 }
