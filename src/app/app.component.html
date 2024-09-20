@@ -1,9 +1,9 @@
-<nav>
+<!-- Navigation bar, shown only if the user is logged in -->
+<nav *ngIf="isLoggedIn">
   <ul>
     <li><a routerLink="/movie-card" routerLinkActive="active">Movies</a></li>
     <li><a routerLink="/user-profile" routerLinkActive="active">Profile</a></li>
-    <!-- Trigger the logout method -->
-    <li><a (click)="logout()">Logout</a></li>
+    <li><a routerLink="#" (click)="logout()">Logout</a></li>
     <li>
       <!-- Form with search input field and button in nav bar. ngSubmit event triggers onSearch() method when form is submitted -->
       <form (ngSubmit)="onSearch()">
