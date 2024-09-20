@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 const appRoutes: Routes = [
   // A welcome route that'll point to a WelcomePageComponent that will act as a welcome page with sign-up and login options for users.
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     MovieCardComponent,
     UserRegistrationFormComponent,
     WelcomePageComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DialogComponent
   ],
   imports: [
     AppRoutingModule,
