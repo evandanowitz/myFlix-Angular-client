@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
   <mat-card-header>
     <mat-card-title>Sign Up!</mat-card-title>
   </mat-card-header>
@@ -15,6 +15,38 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput [(ngModel)]="userData.Birthday" type="date" name="Birthday" placeholder="Birthday">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="registerUser()" color="primary">Sign Up</button>
+  </mat-card-actions>
+</mat-card> -->
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Sign Up!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="userData.Username" type="text" name="Username" required>
+        <mat-error *ngIf="!userData.Username">Username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
+        <mat-error *ngIf="!userData.Password">Password is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="userData.Email" type="email" name="Email" required>
+        <mat-error *ngIf="!userData.Email">Email is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Birthday</mat-label>
+        <input matInput [(ngModel)]="userData.Birthday" type="date" name="Birthday">
       </mat-form-field>
     </form>
   </mat-card-content>
