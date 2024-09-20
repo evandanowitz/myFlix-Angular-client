@@ -19,13 +19,11 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) { }
 
   public userRegistration(userData: any): Observable<any> { // userRegistration takes argument of type 'any' that's the 'userDetails' to post to the API endpoint.
-    console.log('Sending user registration data:', userData);
     return this.http.post(apiUrl + 'users', userData).pipe( // Using this.http, it posts it to the API endpoint and returns the API's response.
       catchError(this.handleError)
     );
   }
   public userLogin(userData: any): Observable<any> {
-    console.log(userData);
     return this.http.post(apiUrl + 'login', userData).pipe(
       catchError(this.handleError)
     );
