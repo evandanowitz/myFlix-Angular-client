@@ -23,18 +23,25 @@ export class LoginFormComponent implements OnInit {
   }
 
   loginUser(): void {
-    console.log('User data before sending:', this.userData);
     this.fetchApiData.userLogin(this.userData).subscribe(
       (result) => {
-        console.log('Login Successful:', result);
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('user', JSON.stringify(result.user));
-        this.dialogRef.close();
-        this.snackBar.open('Login Successful', 'OK', { duration: 2000 });
-        this.router.navigate(['movies']);
+
+        // Save token and user info in localStorage
+        localStorage.setItem('token', result.token); // Store the token
+        localStorage.setItem('user', JSON.stringify(result.user)); // Store the username for later use
+        // localStorage.setItem('token', result.token); // Store the token
+        // localStorage.setItem('username', result.user.Username); // Store the username for later use
+
+        this.dialogRef.close(); // Close the login dialog
+
+        this.snackBar.open('Login Successful', 'OK', { duration: 2000 }); // Display success message
+
+        this.router.navigate(['movies']); // Navigate to the movies page after successful login
       }, (error) => {
         console.error('Login Failure:', error);
-        this.snackBar.open(error, 'OK', { duration: 2000 });
+
+        // this.snackBar.open(error, 'OK', { duration: 2000 });
+        this.snackBar.open('Login Failed: ' + error.message, 'OK', { duration: 2000 });
       }
     );
   }

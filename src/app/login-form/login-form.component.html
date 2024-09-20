@@ -4,11 +4,15 @@
   </mat-card-header>
   <mat-card-content>
     <form>
-      <mat-form-field>
-        <input matInput [(ngModel)]="userData.Username" type="text" name="Username" placeholder="Username" required>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="userData.Username" type="text" name="Username" required>
+        <mat-error *ngIf="!userData.Username">Username is required</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="userData.Password" type="password" name="Password" placeholder="Password" required>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
+        <mat-error *ngIf="!userData.Password">Password is required</mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>
