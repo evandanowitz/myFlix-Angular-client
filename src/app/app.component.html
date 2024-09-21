@@ -1,19 +1,4 @@
-<!-- Navigation bar, shown only if the user is logged in -->
-<nav *ngIf="isLoggedIn">
-  <ul>
-    <li><a routerLink="/movie-card" routerLinkActive="active">Movies</a></li>
-    <li><a routerLink="/user-profile" routerLinkActive="active">Profile</a></li>
-    <li><a routerLink="#" (click)="logout()">Logout</a></li>
-    <li>
-      <!-- Form with search input field and button in nav bar. ngSubmit event triggers onSearch() method when form is submitted -->
-      <form (ngSubmit)="onSearch()">
-        <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search movies by title..."
-          aria-label="Search movies" />
-        <button type="submit">Search</button>
-      </form>
-    </li>
-  </ul>
-</nav>
-
 <!-- This loads the component based on routing -->
-<router-outlet />
+
+<app-nav-bar></app-nav-bar> <!-- Custom tag for the NavBarComponent -->
+<router-outlet /> <!-- Placeholder for routed components -->

@@ -10,6 +10,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,8 +25,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 const appRoutes: Routes = [
   // A welcome route that'll point to a WelcomePageComponent that will act as a welcome page with sign-up and login options for users.
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     WelcomePageComponent,
     UserProfileComponent,
-    DialogComponent
+    DialogComponent,
+    NavBarComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -55,6 +59,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
+    MatToolbarModule,
+    MatMenuModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

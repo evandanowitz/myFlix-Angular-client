@@ -11,8 +11,8 @@ div {
 
 /* Card styling */
 mat-card {
-  flex: 1 1 300px;
-  /* Flex property for responsive layout */
+  flex: 1 1 calc(33% - 40px);
+  /* Flex property for responsive layout. Allow 3 cards per row with spacing. */
   margin: 15px;
   /* Add margin between cards */
   max-width: 300px;
@@ -20,9 +20,12 @@ mat-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   /* Add shadow for depth */
   border-radius: 10px;
-  /* Rounded corners */
+  /* Rounded corner */
   transition: transform 0.2s ease-in-out;
   /* Smooth transition for hover effect */
+  background-color: #e3f2fd;
+  padding: 10px;
+  border: 2px solid #3498db;
 }
 
 /* Hover effect for cards */
