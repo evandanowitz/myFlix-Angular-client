@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
     if (storedUser) {
       console.log('User info found in localStorage:', storedUser);
       this.user = JSON.parse(storedUser);
-      this.loadFavoriteMovies(); // Load favorite movies after getting user info
+      this.loadFavoriteMovies();
     } else {
       console.error('No user data found in localStorage.');
     }
@@ -57,7 +57,6 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.getGenre(genre).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
         data: {
-          // title: `Genre: ${response.Name}`,
           title: `Genre: ${genre}`,
           content: response.Description
         }
@@ -69,7 +68,6 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.getDirector(director).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
         data: {
-          // title: `Director: ${response.Name}`,
           title: `Director: ${director}`,
           content: response.Bio
         }

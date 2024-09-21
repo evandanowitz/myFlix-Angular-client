@@ -1,12 +1,8 @@
-<!-- Navigation bar, shown only if the user is logged in -->
-
 <nav *ngIf="isLoggedIn">
-  <!-- Hamburger icon, toggles the menu on click -->
   <div class="hamburger" (click)="isMenuOpen = !isMenuOpen" [class.active]="isMenuOpen">
     ☰
   </div>
 
-  <!-- Navigation container, includes the menu items and the search form -->
   <div class="nav-items" [class.active]="isMenuOpen">
     <span class="myFlix">myFlix</span>
     <span class="spacer"></span>

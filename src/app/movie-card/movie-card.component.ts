@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FetchApiDataService } from '../fetch-api-data.service'; // Your service for fetching movie data
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -25,26 +25,20 @@ export class MovieCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Check if movies were passed from the parent component
-    if (this.movies.length > 0) {
-      // If movies are passed, just use them as filteredMovies
-      this.filteredMovies = this.movies;
-    } else {
-      // If no movies are passed, default to fetching all movies
+    if (this.movies.length > 0) { // Check if movies were passed from the parent component
+      this.filteredMovies = this.movies; // If movies are passed, just use them as filteredMovies
+    } else { // If no movies are passed, default to fetching all movies
       this.getMovies();
     }
 
-    // Get user's favorite movies
     this.getFavoriteMovies();
 
-    // Handle search functionality
     this.route.queryParams.subscribe(params => {
       this.searchTerm = params['searchTerm'] || '';
       this.filterMovies();
     });
   }
 
-  // Fetch all movies (called if no movies are passed via @Input)
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -53,7 +47,6 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Fetch user's favorite movies
   getFavoriteMovies(): void {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
@@ -72,7 +65,6 @@ export class MovieCardComponent implements OnInit {
     return this.favoriteMovies.includes(movieId);
   }
 
-  // Toggle favorite status (add/remove)
   toggleFavorite(movie: any): void {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
@@ -101,7 +93,6 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
-  // Filter movies based on the search term
   filterMovies(): void {
     if (this.searchTerm.trim() === '') {
       this.filteredMovies = this.movies;
@@ -116,7 +107,6 @@ export class MovieCardComponent implements OnInit {
     this.fetchApiData.getGenre(genre).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
         data: {
-          // title: `Genre: ${response.Name}`,
           title: `Genre: ${genre}`,
           content: response.Description
         }
@@ -127,7 +117,6 @@ export class MovieCardComponent implements OnInit {
     this.fetchApiData.getDirector(director).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
         data: {
-          // title: `Director: ${response.Name}`,
           title: `Director: ${director}`,
           content: response.Bio
         }

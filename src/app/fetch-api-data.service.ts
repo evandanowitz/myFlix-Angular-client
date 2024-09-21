@@ -4,22 +4,17 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 
 // Declaring the API URL that will provide data for the client app
-const apiUrl = 'https://myflix-db-movie-app-af5513e7733f.herokuapp.com/'; // Hosted API URL (Heroku)
+const apiUrl = 'https://myflix-db-movie-app-af5513e7733f.herokuapp.com/';
 
-// Decorator that marks a class as available to be provided and injected as a dependency
 @Injectable({
-  providedIn: 'root' // Configures the service for root injector (makes it available throughout app)
+  providedIn: 'root'
 })
 export class FetchApiDataService {
-  // Injecting HttpClient module to constructor params provides it to entire class, available via `this.http`
-  // A special method used for initializing objects created with the class. Called when a new instance of the class is created.
-  // 'private' restricts the visibility of the 'http' property to within the class. 'http' property can only be used inside the FetchApiDataService class.
-  // 'http' is the name of the property that holds the 'HttpClient' instance.
-  // 'HttpClient' is a service used to make HTTP requests.
+
   constructor(private http: HttpClient) { }
 
-  public userRegistration(userData: any): Observable<any> { // userRegistration takes argument of type 'any' that's the 'userDetails' to post to the API endpoint.
-    return this.http.post(apiUrl + 'users', userData).pipe( // Using this.http, it posts it to the API endpoint and returns the API's response.
+  public userRegistration(userData: any): Observable<any> {
+    return this.http.post(apiUrl + 'users', userData).pipe(
       catchError(this.handleError)
     );
   }
@@ -77,7 +72,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'users/' + Username + 'movies/', {
       headers: new HttpHeaders({ Authorization: 'Bearer ' + token })
-    }).pipe( // this endpoint does not exist in movie_api, but probably should.
+    }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -120,20 +115,20 @@ export class FetchApiDataService {
   }
 
   // Non-typed response extraction. @param { Object } res - API response. @returns { any } - Extracted response data.
-  private extractResponseData(res: any): any { // 'res' parameter expected to be an object with data type 'any'. Reps response object from HTTP request.
-    const body = res; // assign the 'res' parameter (the response object) to 'body' variable
-    return body || {}; // returns the 'body' variable. If 'body' is falsy (null or undefined), it returns an empty object {}. Will always return a valid object.
+  private extractResponseData(res: any): any {
+    const body = res;
+    return body || {};
   }
 
   // Handles HTTP errors. @param { HttpErrorResponse } error - HTTP error response. @returns { any } - Error details.
-  private handleError(error: HttpErrorResponse): any { // parameter 'error' is of type 'HttpErrorResponse', which represents the error response from HTTP req.
+  private handleError(error: HttpErrorResponse): any {
     console.error('Registration error:', error);
-    if (error.error instanceof ErrorEvent) { // checks if the error is a client-side or network error. 'ErrorEvent' is used for client-side errors.
-      console.error('Client-side error:', error.error.message); // logs error message to console. Logs the error message from the 'ErrorEvent'.)
-    } else { // if the error is a server-side error...
-      console.error(`Backend error: ${error.status}, body was:`, error.error); // logs error
-      return throwError(() => // a function from RxJS that returns an observable that emits an error.
-        new Error(error.error.message || 'Something went wrong; please try again later.') // Creates a new error with a specific message to be thrown.
+    if (error.error instanceof ErrorEvent) {
+      console.error('Client-side error:', error.error.message);
+    } else {
+      console.error(`Backend error: ${error.status}, body was:`, error.error);
+      return throwError(() =>
+        new Error(error.error.message || 'Something went wrong; please try again later.')
       );
     }
   }

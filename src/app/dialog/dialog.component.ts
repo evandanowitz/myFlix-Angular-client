@@ -1,5 +1,3 @@
-// The DialogComponent will be responsible for displaying the info passed to it (e.g., genre details, director bio, or synopsis).
-
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 

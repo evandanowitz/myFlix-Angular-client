@@ -1,27 +1,22 @@
 <div class="user-profile-container">
   <h1 class="user-profile-title">User Profile</h1>
 
-  <!-- Display user info section -->
   <div class="display-user-info-section">
     <h2>User Info</h2>
-    <!-- Username -->
     <div class="user-info-item">
       <span class="user-info-label">Username:</span>
       <span>{{ user.Username }}</span>
     </div>
-    <!-- Email -->
     <div class="user-info-item">
       <span class="user-info-label">Email:</span>
       <span>{{ user.Email }}</span>
     </div>
-    <!-- Birthday -->
     <div class="user-info-item">
       <span class="user-info-label">Birthday:</span>
       <span>{{ user.Birthday | date }}</span>
     </div>
   </div>
 
-  <!-- Update User Info Section -->
   <div class="update-user-info-section">
     <h2>Update User Info</h2>
     <form (ngSubmit)="updateUserInfo()">
@@ -49,7 +44,6 @@
     </form>
   </div>
 
-  <!-- Favorite Movies Section -->
   <div class="favorite-movies-section">
     <h2>Favorite Movies</h2>
     <div *ngIf="favoriteMovies.length > 0; else noFavorites">
@@ -72,7 +66,6 @@
       </div>
     </div>
 
-    <!-- If no favorite movies are available -->
     <ng-template #noFavorites>
       <p>No favorite movies added yet.</p>
     </ng-template>

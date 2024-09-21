@@ -27,14 +27,14 @@ export class LoginFormComponent implements OnInit {
       (result) => {
 
         // Save token and user info in localStorage
-        localStorage.setItem('token', result.token); // Store the token
-        localStorage.setItem('user', JSON.stringify(result.user)); // Store the username for later use
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('user', JSON.stringify(result.user));
 
-        this.dialogRef.close(); // Close the login dialog
+        this.dialogRef.close(); // Close login dialog
 
-        this.snackBar.open('Login Successful', 'OK', { duration: 2000 }); // Display success message
+        this.snackBar.open('Login Successful', 'OK', { duration: 2000 });
 
-        this.router.navigate(['movies']); // Navigate to the movies page after successful login
+        this.router.navigate(['movies']);
       }, (error) => {
         console.error('Login Failure:', error);
 

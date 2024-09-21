@@ -12,22 +12,21 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // Check if user is logged in by looking for the token in localStorage
     const token = localStorage.getItem('token');
 
-    // If there is no token, redirect to the welcome page
+    // If no token, redirect to welcome-page
     if (!token) {
       this.router.navigate(['welcome-page']);
     }
   }
 
-  // Detect if the user is navigating away from the app or closing the tab
+  // Detect if user is navigating away from app or closing tab
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
-    // Check if the user is navigating away from your domain
+    // Check if user is navigating away from domain
     if (!document.referrer.includes('evandanowitz.github.io/myflix-angular-client')) {
-      // Clear session only if navigating away from your domain
-      localStorage.clear();  // This will log the user out
+      // Clear session if navigating away from domain
+      localStorage.clear();
       console.log('User session cleared on navigation away from the domain');
     }
   }
