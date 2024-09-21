@@ -1,4 +1,9 @@
 <!-- This loads the component based on routing -->
 
 <app-nav-bar></app-nav-bar> <!-- Custom tag for the NavBarComponent -->
+
+<div *ngIf="showLoginMessage" class="login-message">
+  Must log in or sign up to continue.
+</div>
+
 <router-outlet /> <!-- Placeholder for routed components -->

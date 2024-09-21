@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'login-form', component: LoginFormComponent },
   { path: '', redirectTo: 'welcome-page', pathMatch: 'full' }, // Default route,
-  { path: '**', redirectTo: '/movie-card' } // Fallback route
+  { path: '**', redirectTo: 'welcome-page' } // Fallback route
 ];
 
 @NgModule({
