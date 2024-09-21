@@ -8,12 +8,11 @@
 
   <!-- Navigation container, includes the menu items and the search form -->
   <div class="nav-items" [class.active]="isMenuOpen">
-    <ul class="nav-menu">
-      <li><a routerLink="/movie-card" routerLinkActive="active">Movies</a></li>
-      <li><a routerLink="/user-profile" routerLinkActive="active">Profile</a></li>
-      <li><a routerLink="#" (click)="logout()">Logout</a></li>
-    </ul>
-    <!-- Search form -->
+    <span class="myFlix">myFlix</span>
+    <span class="spacer"></span>
+    <button routerLink="/movie-card" routerLinkActive="active">Movies</button>
+    <button routerLink="/user-profile" routerLinkActive="active">Profile</button>
+    <button routerLink="#" (click)="logout()">Logout</button>
     <form (ngSubmit)="onSearch()" class="search-form">
       <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search movies by title..."
         aria-label="Search movies" />

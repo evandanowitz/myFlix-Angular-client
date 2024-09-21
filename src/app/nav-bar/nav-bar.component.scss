@@ -18,32 +18,6 @@ nav {
   /* Optional: set a max-width for larger screens */
 }
 
-ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  /* Centers the list items horizontally */
-}
-
-li {
-  margin-right: 20px;
-}
-
-a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-a:hover {
-  color: #f39c12;
-}
-
 form {
   display: flex;
   align-items: center;
@@ -78,8 +52,9 @@ input[type="text"]:focus {
 
 button {
   background-color: #f39c12;
-  color: white;
+  color: #000;
   font-size: 18px;
+  text-decoration: none;
   font-weight: bold;
   border-radius: 4px;
   padding: 5px 15px;
@@ -98,6 +73,18 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.myFlix {
+  color: white;
+  font-size: 36px;
+  margin-left: 10px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+  padding: 10px 10px 10px 10px;
+
 }
 
 .search-form {
