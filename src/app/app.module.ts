@@ -28,14 +28,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 
-const appRoutes: Routes = [
-  // A welcome route that'll point to a WelcomePageComponent that will act as a welcome page with sign-up and login options for users.
-  { path: 'welcome', component: WelcomePageComponent },
-  // A route that'll point to a MovieCardComponent that will display movies for users.
-  { path: 'movies', component: MovieCardComponent },
-  // An empty route, which will route to the WelcomePageComponent by default.
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
-];
+// const appRoutes: Routes = [
+//   // A welcome route that'll point to a WelcomePageComponent that will act as a welcome page with sign-up and login options for users.
+//   { path: 'welcome', component: WelcomePageComponent },
+//   // A route that'll point to a MovieCardComponent that will display movies for users.
+//   { path: 'movies', component: MovieCardComponent },
+//   // An empty route, which will route to the WelcomePageComponent by default.
+//   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+// ];
 
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatToolbarModule,
     MatMenuModule,
-    RouterModule.forRoot(appRoutes)
+    // RouterModule.forRoot(appRoutes)
   ],
   providers: [
     provideClientHydration(),

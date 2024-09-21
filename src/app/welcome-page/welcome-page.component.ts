@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class WelcomePageComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
   ngOnInit(): void {
+    localStorage.clear();
+    console.log('User session cleared, redirected to welcome page');
   }
   // This function will open the dialog when the signup button is clicked
   openUserRegistrationDialog(): void {

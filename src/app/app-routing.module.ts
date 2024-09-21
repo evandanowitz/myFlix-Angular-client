@@ -8,6 +8,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 const routes: Routes = [
   { path: 'welcome-page', component: WelcomePageComponent },
   { path: 'movie-card', component: MovieCardComponent },
+  { path: 'movies', component: MovieCardComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'login-form', component: LoginFormComponent },
   { path: '', redirectTo: 'welcome-page', pathMatch: 'full' }, // Default route,

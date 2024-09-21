@@ -29,8 +29,6 @@ export class LoginFormComponent implements OnInit {
         // Save token and user info in localStorage
         localStorage.setItem('token', result.token); // Store the token
         localStorage.setItem('user', JSON.stringify(result.user)); // Store the username for later use
-        // localStorage.setItem('token', result.token); // Store the token
-        // localStorage.setItem('username', result.user.Username); // Store the username for later use
 
         this.dialogRef.close(); // Close the login dialog
 
@@ -40,7 +38,6 @@ export class LoginFormComponent implements OnInit {
       }, (error) => {
         console.error('Login Failure:', error);
 
-        // this.snackBar.open(error, 'OK', { duration: 2000 });
         this.snackBar.open('Login Failed: ' + error.message, 'OK', { duration: 2000 });
       }
     );
