@@ -1,14 +1,20 @@
+<!-- Navigation bar, visible only if user is logged in -->
+
 <nav *ngIf="isLoggedIn">
+  <!-- Hamburger menu icon to toggle the menu upon click -->
   <div class="hamburger" (click)="isMenuOpen = !isMenuOpen" [class.active]="isMenuOpen">
     ☰
   </div>
 
+  <!-- Navigation links and search form -->
   <div class="nav-items" [class.active]="isMenuOpen">
     <span class="myFlix">myFlix</span>
     <span class="spacer"></span>
     <button routerLink="/movie-card" routerLinkActive="active">Movies</button>
     <button routerLink="/user-profile" routerLinkActive="active">Profile</button>
     <button routerLink="#" (click)="logout()">Logout</button>
+
+    <!-- Search form for finding movies -->
     <form (ngSubmit)="onSearch()" class="search-form">
       <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search movies by title..."
         aria-label="Search movies" />

@@ -1,3 +1,7 @@
+<!-- Renders a list of movie cards -->
+<!-- Uses *ngFor directive to iterate over 'filteredMovies', displaying each movie in its own separate card -->
+<!-- In this expression, 'movies' refers to the movies variable declared in the component file -->
+
 <div style="display: flex;">
   <mat-card *ngFor="let movie of filteredMovies" style="flex: 1 1 auto;">
     <mat-card-header>
@@ -8,10 +12,16 @@
     <img src="{{movie.ImagePath}}" alt="{{movie.Title}}" class="movie-img" />
 
     <mat-card-actions>
+      <!-- Button to show genre information -->
       <button mat-button color="primary" (click)="openGenreDialog(movie.Genre.Name)">Genre</button>
+
+      <!-- Button to show director information -->
       <button mat-button color="primary" (click)="openDirectorDialog(movie.Director.Name)">Director</button>
+
+      <!-- Button to show movie synopsis -->
       <button mat-button color="primary" (click)="openSynopsisDialog(movie)">Synopsis</button>
 
+      <!-- Heart Icon: Button to add/remove movie from favorites -->
       <mat-icon (click)="toggleFavorite(movie)" class="favorite-icon">
         {{ isFavorite(movie._id) ? 'favorite' : 'favorite_border' }}
       </mat-icon>

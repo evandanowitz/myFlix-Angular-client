@@ -1,11 +1,11 @@
 mat-card {
   padding: 15px 15px;
-  /* Add padding inside the card */
+  /* Padding inside the card */
 }
 
 mat-card-title {
   margin-bottom: 20px;
-  /* Adds space between the title and the first field */
+  /* Space between title and first field */
 }
 
 mat-form-field {
@@ -19,8 +19,10 @@ button[mat-raised-button] {
   margin-top: -15px;
   /* Reduces space between the last field and the button */
   width: 100%;
+  /* Full width button */
   padding: 12px;
   background-color: #e67e22;
+  /* Button background color */
   color: white;
   font-size: 1.1em;
   font-weight: 600;
@@ -31,10 +33,12 @@ button[mat-raised-button] {
 button[mat-raised-button]:hover {
   background-color: #d35400;
   transform: translateY(-3px);
+  /* Button moves up on hover */
 }
 
 button[mat-raised-button]:active {
   transform: translateY(0);
+  /* Button returns to normal when clicked */
   background-color: #d35400;
   box-shadow: none;
 }

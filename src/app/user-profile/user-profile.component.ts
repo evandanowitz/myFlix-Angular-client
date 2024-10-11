@@ -4,6 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
+/**
+ * User Profile component allows users to view their details, update their info, and manage favorite movies.
+ */
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -21,12 +24,17 @@ export class UserProfileComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
+  /**
+   * Fetches user info and all movies on component initialization.
+   */
   ngOnInit(): void {
     this.fetchAllMovies();
     this.getUserInfo();
   }
 
-  // Fetch all movies
+  /**
+   * Fetches all movies and stores them in the 'movies' array.
+   */
   fetchAllMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((movies: any) => {
       this.movies = movies;
@@ -34,25 +42,32 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  // Get user data (and favorite movie IDs) from localStorage
+  /**
+   * Retrieves user data from localStorage and updated the 'user' object.
+   */
   getUserInfo(): void {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       console.log('User info found in localStorage:', storedUser);
       this.user = JSON.parse(storedUser);
-      this.loadFavoriteMovies();
+      this.loadFavoriteMovies(); // Load favorite movies after getting user info
     } else {
       console.error('No user data found in localStorage.');
     }
   }
 
+  /**
+   * Filters favorite movies based on user's favorite movie IDs.
+   */
   loadFavoriteMovies(): void {
     const favoriteMovieIds = this.user.FavoriteMovies || [];
     this.favoriteMovies = this.movies.filter((movie: any) => favoriteMovieIds.includes(movie._id));
     console.log('Filtered favoriteMovies:', this.favoriteMovies);
   }
 
-  // Open dialog for Genre
+  /**
+   * Opens a dialog to display genre information for the selected movie.
+   */
   openGenreDialog(genre: string): void {
     this.fetchApiData.getGenre(genre).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
@@ -63,7 +78,9 @@ export class UserProfileComponent implements OnInit {
       });
     });
   }
-  // Open dialog for Director
+  /**
+   * Opens a dialog to display director information for the selected movie.
+   */
   openDirectorDialog(director: string): void {
     this.fetchApiData.getDirector(director).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
@@ -74,7 +91,10 @@ export class UserProfileComponent implements OnInit {
       });
     });
   }
-  // Open dialog for Synopsis
+
+  /**
+   * Opens a dialog to display the synopsis for the selected movie.
+   */
   openSynopsisDialog(movie: any): void {
     this.dialog.open(DialogComponent, {
       data: {
@@ -84,7 +104,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  // Toggle favorite status for a movie (add/remove)
+  /**
+   * Toggles the favorite status of a movie for user.
+   * Adds or removes the movie from user's favorites list.
+   */
   toggleFavorite(movie: any): void {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) return;
@@ -108,11 +131,16 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  // Check if a movie is in favorites
+  /**
+   * Checks if a movie is in user's favorites.
+   */
   isFavorite(movieId: string): boolean {
     return this.user.FavoriteMovies.includes(movieId);
   }
 
+  /**
+   * Updates user's information and saves it to localStorage.
+   */
   updateUserInfo(): void {
     const username = this.user.Username;
     this.fetchApiData.editUser(username, this.updatedUser).subscribe(

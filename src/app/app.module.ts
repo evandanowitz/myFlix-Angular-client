@@ -1,4 +1,4 @@
-// // This is the entry point of your app, meaning that it's mostly used to wire up different modules together and express dependencies.
+// The main module of the app. Wires up comments and imports necessary modules and services.
 
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
+    // Declare components used within the module
     AppComponent,
     LoginFormComponent,
     MovieCardComponent,
@@ -40,6 +41,7 @@ import { MatMenuModule } from '@angular/material/menu';
     NavBarComponent,
   ],
   imports: [
+    // Imports necessary Angular and Material modules
     AppRoutingModule,
     BrowserModule,
     FormsModule,
@@ -54,10 +56,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule
   ],
   providers: [
+    // Register services and provide necessary dependencies
     provideClientHydration(),
     provideHttpClient(),
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // Bootstrap the root component of the app
 })
 export class AppModule { }

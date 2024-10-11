@@ -5,6 +5,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
+/**
+ * MovieCardComponent is responsible for rendering movie cards.
+ * It allows users to view information about each movie, including genre, director, and synopsis.
+ * Users can also add or remove movies from their favorites.
+ */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -12,10 +17,10 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class MovieCardComponent implements OnInit {
   @Input()
-  movies: any[] = [];
-  filteredMovies: any[] = [];
-  favoriteMovies: any[] = [];
-  searchTerm: string = '';
+  movies: any[] = []; // Holds the array of movies to display.
+  filteredMovies: any[] = []; // Stores filtered movies based on search term.
+  favoriteMovies: any[] = []; // Stores user's favorite movies.
+  searchTerm: string = ''; // Holds user's search term.
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -24,21 +29,33 @@ export class MovieCardComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
+  /**
+   * Initializes the component by checking for passed movies, fetching all movies fetching movies if none are provided, 
+   * retrieving user's favorite moves, and handling search term filtering.
+   */
   ngOnInit(): void {
-    if (this.movies.length > 0) { // Check if movies were passed from the parent component
-      this.filteredMovies = this.movies; // If movies are passed, just use them as filteredMovies
-    } else { // If no movies are passed, default to fetching all movies
+    if (this.movies.length > 0) { // Check if movies were passed from the parent component.
+      this.filteredMovies = this.movies; // If movies are passed, just use them as filteredMovies.
+    } else { // If no movies are passed, default to fetching all movies.
       this.getMovies();
     }
 
     this.getFavoriteMovies();
 
+    /**
+     * Subscribes to query parameters to handle search changes.
+     * Updates the searchTerm and filters the movies accordingly.
+     */
     this.route.queryParams.subscribe(params => {
-      this.searchTerm = params['searchTerm'] || '';
-      this.filterMovies();
+      this.searchTerm = params['searchTerm'] || ''; // Retrieves the search term from query parameters.
+      this.filterMovies(); // Filters the movies based on the search term.
     });
   }
 
+  /**
+   * Fetches all movies and stores them in the component.
+   * This is called if no movies are passed via teh Input decorator.
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -47,6 +64,9 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetches user's favorite movies from the backend.
+   */
   getFavoriteMovies(): void {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
@@ -60,11 +80,19 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Check if a movie is in the user's favorites
+  /**
+   * Checks if a movie is in user's favorites.
+   * @param movieId - The ID of the movie to check.
+   * @returns True if the movie is a favorite, false otherwise.
+   */
   isFavorite(movieId: string): boolean {
     return this.favoriteMovies.includes(movieId);
   }
 
+  /**
+   * Toggles the favorite status of a movie (add or remove).
+   * @param movie - The movie object to toggle.
+   */
   toggleFavorite(movie: any): void {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
@@ -93,6 +121,9 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  /**
+   * Filters movies based on the search term entered by user.
+   */
   filterMovies(): void {
     if (this.searchTerm.trim() === '') {
       this.filteredMovies = this.movies;
@@ -103,6 +134,10 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens a dialog to display the genre information for a movie.
+   * @param genre - The name of the genre to display.
+   */
   openGenreDialog(genre: string): void {
     this.fetchApiData.getGenre(genre).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
@@ -113,6 +148,11 @@ export class MovieCardComponent implements OnInit {
       });
     });
   }
+
+  /**
+   * Opens a dialog to display the director information for a movie.
+   * @param director - The name of the director to display.
+   */
   openDirectorDialog(director: string): void {
     this.fetchApiData.getDirector(director).subscribe((response: any) => {
       this.dialog.open(DialogComponent, {
@@ -123,6 +163,11 @@ export class MovieCardComponent implements OnInit {
       });
     });
   }
+
+  /**
+   * Opens a dialog to display the synopsis for a movie.
+   * @param movie - The movie object to display.
+   */
   openSynopsisDialog(movie: any): void {
     this.dialog.open(DialogComponent, {
       data: {

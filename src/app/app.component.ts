@@ -1,4 +1,5 @@
-// App's root component file (default entry point to the app). When user launches app, root component is displayed as home page.
+// App's root component (default entry point to app). When app is launched, root component is displayed as home page.
+
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,25 +9,32 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  title = 'myFlix-Angular-client';
 
   constructor(private router: Router) { }
 
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * Checks if the user is logged in by verifying the presence of a token in localStorage.
+   * If no token is found, the user is redirected to the welcome page.
+   */
   ngOnInit(): void {
     const token = localStorage.getItem('token');
 
-    // If no token, redirect to welcome-page
     if (!token) {
       this.router.navigate(['welcome-page']);
     }
   }
 
-  // Detect if user is navigating away from app or closing tab
+  /**
+   * Detects if user is navigating away from the app or closing the tab.
+   * Clears session by removing localStorage if user navigates away from domain.
+   * @param event - The navigation event.
+   */
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
-    // Check if user is navigating away from domain
     if (!document.referrer.includes('evandanowitz.github.io/myflix-angular-client')) {
-      // Clear session if navigating away from domain
-      localStorage.clear();
+      localStorage.clear(); // Logs user out by clearing localStorage
       console.log('User session cleared on navigation away from the domain');
     }
   }
