@@ -23,11 +23,15 @@ Before running the project, ensure you have the following installed locally on y
 - Angular CLI: version 18.1.1 or later
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/evandanowitz/myFlix-Angular-client.git`
-2. Navigate to the project directory: `cd myflix-angular-client`
-3. Install dependencies: `npm install`
-4. Start the development server: `ng serve`
-  - Navigate to `http://localhost:4200/` in your browser. The application will automatically reload if you change any source files.
+1. Clone the repository:
+- `git clone https://github.com/evandanowitz/myFlix-Angular-client.git`
+2. Navigate to the project directory:
+- `cd myflix-angular-client`
+3. Install dependencies:
+- `npm install`
+4. Start the development server:
+- `ng serve`
+- Navigate to `http://localhost:4200/` in your browser. The application will automatically reload if you change any source files.
 
 ## Code scaffolding
 
@@ -39,30 +43,34 @@ To generate other Angular resources (directive, pipe, service, etc.), use:
 
 ## Building the Project
 
-To build the project, run: `ng build`
+To build the project, run:
+- `ng build`
 - The build artifacts will be stored in the `dist/` directory.
 
 ## Running Unit Tests
 
-To execute unit tests via [Karma](https://karma-runner.github.io), run: `ng test`
+To execute unit tests via [Karma](https://karma-runner.github.io), run:
+- `ng test`
 
 ## Running End-To-End Tests
 
-To execute end-to-end tests via a platform of your choice, run: `ng e2e`
-- (Note: You may need to install additional package for end-to-end testing.)
+To execute end-to-end tests via a platform of your choice, run:
+- `ng e2e`
+- Note: You may need to install additional package for end-to-end testing.
 
 ## Deployment
 
-This project is hosted on GitHub Pages. To deploy, run: `ng deploy --base-href=/`
+This project is hosted on GitHub Pages. To deploy, run:
+- `ng deploy --base-href=/`
 - Make sure you have the `angular-cli-ghpages` package installed before deploying.
 
 ## Technical Requirements (Recap)
 
-Angular Version: The app is built with Angular 18.1.1 and higher.
-Server-Side: The client interacts with the server-side REST API.
-Design: The app is styled using Angular Material.
-Documentation: TypeDoc is used for inline documentation in the codebase.
-Hosting: The app is hosted on GitHub Pages.
+- Angular Version: The app is built with Angular 18.1.1 and higher.
+- Server-Side: The client interacts with the server-side REST API.
+- Design: The app is styled using Angular Material.
+- Documentation: TypeDoc is used for inline documentation in the codebase.
+- Hosting: The app is hosted on GitHub Pages.
 
 ## Further help
 
